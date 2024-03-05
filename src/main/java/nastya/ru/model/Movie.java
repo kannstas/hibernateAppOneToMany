@@ -23,10 +23,9 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(String title, int yearOfProduction, Director director) {
+    public Movie(String title, int yearOfProduction) {
         this.title = title;
         this.yearOfProduction = yearOfProduction;
-        this.director=director;
     }
 
     public int getId() {

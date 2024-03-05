@@ -2,6 +2,7 @@ package nastya.ru.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,10 +19,11 @@ public class Director {
     @Column(name = "age")
     private int age;
 
-    @OneToMany(mappedBy = "director")
-    private List <Movie> movies;
+    @OneToMany(mappedBy = "director", cascade = CascadeType.PERSIST)
+    private List<Movie> movies;
 
-    public Director() {}
+    public Director() {
+    }
 
     public Director(String name, int age) {
         this.name = name;
@@ -58,6 +60,14 @@ public class Director {
 
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
+    }
+
+    public void addMovies(Movie movie) {
+        if (this.movies == null)
+            this.movies = new ArrayList<>();
+
+        this.movies.add(movie);
+        movie.setDirector(this);
     }
 
     @Override

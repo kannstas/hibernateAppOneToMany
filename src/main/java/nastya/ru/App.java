@@ -20,14 +20,13 @@ public class App {
         Session session = sessionFactory.getCurrentSession();
 
         try {
+            session.beginTransaction();
 
-            Director director = new Director("James Cameron", 69);
-            Movie movie = new Movie("Avatar", 2009, director);
+            Director director = new Director("Rob Cohen", 74);
+            director.addMovies(new Movie("Fast X", 2001));
+            director.addMovies(new Movie("The Boy Next Door", 2014));
 
             session.persist(director);
-            session.persist(movie);
-
-            director.setMovies(new ArrayList<>(Collections.singletonList(movie)));
 
             session.getTransaction().commit();
 
